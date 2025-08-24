@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        form {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        input, select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+        input:focus, select:focus {
+            border-color: #34495e;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52,73,94,0.5);
+        }
+        button {
+            padding: 12px;
+            background: #34495e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Kharch</h1>
+    <form action="/add-expense" method="POST">
+        <input type="text" name="title" placeholder="Name of expense" required>
+        <input type="number" name="amount" placeholder="Amount of expense" required>
+
+        <select name="category" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Study">Study</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <button type="submit">Add Expense</button>
+    </form>
+</body>
+</html>

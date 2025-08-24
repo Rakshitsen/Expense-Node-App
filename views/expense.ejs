@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background: #f9f9f9;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            padding: 10px;
+            width: 220px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .search-btn {
+            padding: 10px 15px;
+            background: #34495e;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #2c3e50;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .summary {
+            text-align: center;
+            margin: 20px auto;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            background: #ecf0f1;
+            padding: 10px 20px;
+            border-radius: 10px;
+            width: fit-content;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        th {
+            background: #34495e;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f6f9;
+        }
+
+        tr:hover {
+            background: #dfe6e9;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        td {
+            font-size: 15px;
+        }
+
+        .btn {
+            display: block;
+            width: fit-content;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #34495e;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>Daily Kharch Tracker</h2>
+        <form action="/filter" method="GET">
+            <input type="text" name="category" class="search-box" placeholder="🔍 Search by Category">
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+
+    </div>
+
+    <table id="expenseTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Amount (₹)</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% total_expense.forEach(total_expense=> { %>
+                <tr>
+                    <td>
+                        <%= total_expense.title %>
+                    </td>
+                    <td>
+                        <%= total_expense.amount %>
+                    </td>
+                    <td>
+                        <%= total_expense.category %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
+    <a href="/add" class="btn">➕ Add Expense</a>
+    <div class="summary">
+        <h3>💰 Total Expense: ₹ <%= totalAmount  %>
+        </h3>
+    </div>
+
+
+    <!-- <script>
+        function filterTable() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let rows = document.querySelectorAll("#expenseTable tbody tr");
+
+            rows.forEach(row => {
+                let category = row.cells[2].textContent.toLowerCase();
+                if (category.includes(input) || input === "") {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script> -->
+</body>
+
+</html>
