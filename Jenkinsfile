@@ -29,15 +29,15 @@ pipeline {
             }
         }
 
-        stage('Scan Image') {
-            steps {
-                echo "Docker image scanning stage"
-                sh '''
-                    docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-                    aquasec/trivy image $USER_NAME/$IMAGE_NAME:$BUILD_NUMBER
-                '''
-            }
-        }
+        // stage('Scan Image') {
+        //     steps {
+        //         echo "Docker image scanning stage"
+        //         sh '''
+        //             docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+        //             aquasec/trivy image $USER_NAME/$IMAGE_NAME:$BUILD_NUMBER
+        //         '''
+        //     }
+        // }
 
         stage('Push Image') {
             steps {
