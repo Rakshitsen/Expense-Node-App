@@ -66,7 +66,9 @@ pipeline {
                     sh '''
                         git config --global user.email "rakshitsen1@gmail.com"
                         git config --global user.name "rakshitsen"
+                        git checkout main
                         git add docker/docker-compose.yml
+                        git add k8s/app-deployment.yml
                         git commit -m "Update compose and k8s/ file" || echo "No changes to commit"
                         git push origin main
                     '''
