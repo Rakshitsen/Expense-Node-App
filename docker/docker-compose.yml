@@ -18,7 +18,7 @@ services:
 
 
   app:
-    image: rakshitsen/expense:v10
+    image: rakshitsen/expense:tag
     container_name: expense
     depends_on:
       - mongo

@@ -1,10 +1,10 @@
-pipeline{
+pipeline {
     agent any
     environment {
         USER_NAME = "rakshitsen"
         IMAGE_NAME = "expense"
     }
-    stages{
+    stages {
         stage('Checkout & Build') {
             when {
                 allOf {
@@ -15,31 +15,34 @@ pipeline{
                 }
             }
             steps {
-                    git(
+                git(
                     branch: 'main',
                     url: 'https://github.com/Rakshitsen/Expense-Node-App.git'
                 )
             }
         }
-        stage('build image'){
-            steps{
-                echo "docker image creating stage "
+
+        stage('Build Image') {
+            steps {
+                echo "Docker image creating stage"
                 sh 'docker build -t $USER_NAME/$IMAGE_NAME:$BUILD_NUMBER .'
             }
         }
-        stage('scan image'){
-            steps{
-                echo "docker image scanning stage"
+
+        stage('Scan Image') {
+            steps {
+                echo "Docker image scanning stage"
                 sh '''
                     docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
                     aquasec/trivy image $USER_NAME/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
         }
-        stage('push image'){
-            steps{
-                echo "docker image push stage"
-                withCredentials([usernamePassword(credentialsId: 'Docker_cred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]){
+
+        stage('Push Image') {
+            steps {
+                echo "Docker image push stage"
+                withCredentials([usernamePassword(credentialsId: 'Docker_cred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh '''
                         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
                         docker push $USER_NAME/$IMAGE_NAME:$BUILD_NUMBER
@@ -47,7 +50,27 @@ pipeline{
                     '''
                 }
             }
-            
+        }
+
+        stage('Update docker-compose file') {
+            steps {
+                echo "Update docker-compose file"
+                sh 'sed -i "s|rakshitsen/expense:.*|rakshitsen/expense:${BUILD_NUMBER}|" docker/docker-compose.yml'
+            }
+        }
+
+        stage('Git Push') {
+            steps {
+                withCredentials([gitUsernamePassword(credentialsId: 'Git_cred', gitToolName: 'Default')]) {
+                    sh '''
+                        git config --global user.email "rakshitsen1@gmail.com"
+                        git config --global user.name "rakshitsen"
+                        git add docker/docker-compose.yml
+                        git commit -m "Update compose file" || echo "No changes to commit"
+                        git push origin main
+                    '''
+                }
+            }
         }
     }
 }
