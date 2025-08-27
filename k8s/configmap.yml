@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: expense-config
+  namespace: expense
+data:
+  PORT: "3000"
+  DB_NAME: "project"
+  COLLECTION_NAME: "expense"
+  MONGO_URL: "mongodb://mongo-service:27017"
