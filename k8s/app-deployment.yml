@@ -15,11 +15,11 @@ spec:
     spec:
       initContainers:
         - name: wait-for-mongo
-          image: busybox
+          image: busybox:1.36
           command: ['sh', '-c', 'until nc -z mongo-service 27017; do echo waiting for mongo; sleep 2; done;']
       containers:
         - name: expense-container
-          image: rakshitsen/expense:v10
+          image: rakshitsen/expense:tag
           ports:
             - containerPort: 3000
           # env:
