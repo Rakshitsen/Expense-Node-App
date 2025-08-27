@@ -66,13 +66,16 @@ pipeline {
                     sh '''
                         git config --global user.email "rakshitsen1@gmail.com"
                         git config --global user.name "rakshitsen"
-                        git checkout main
-                        git add .
-                        git commit -m "Update compose and k8s/ file" || echo "No changes to commit"
-                        git push origin main
+
+                        git add docker/docker-compose.yml k8s/app-deployment.yml
+                        git commit -m "Update compose file and deployment" || echo "No changes to commit"
+
+                        # push from detached HEAD directly into main branch
+                        git push origin HEAD:main
                     '''
                 }
             }
-        }
+}
+
     }
 }
