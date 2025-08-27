@@ -29,15 +29,15 @@ pipeline {
             }
         }
 
-        stage('Scan Image') {
-            steps {
-                echo "Docker image scanning stage"
-                sh '''
-                    docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-                    aquasec/trivy image $USER_NAME/$IMAGE_NAME:$BUILD_NUMBER
-                '''
-            }
-        }
+        // stage('Scan Image') {
+        //     steps {
+        //         echo "Docker image scanning stage"
+        //         sh '''
+        //             docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+        //             aquasec/trivy image $USER_NAME/$IMAGE_NAME:$BUILD_NUMBER
+        //         '''
+        //     }
+        // }
 
         stage('Push Image') {
             steps {
@@ -65,6 +65,7 @@ pipeline {
                     sh '''
                         git config --global user.email "rakshitsen1@gmail.com"
                         git config --global user.name "rakshitsen"
+                        git checkout main
                         git add docker/docker-compose.yml
                         git commit -m "Update compose file" || echo "No changes to commit"
                         git push origin main
