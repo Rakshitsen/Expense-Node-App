@@ -19,7 +19,7 @@ spec:
           command: ['sh', '-c', 'until nc -z mongo-service 27017; do echo waiting for mongo; sleep 2; done;']
       containers:
         - name: expense-container
-          image: rakshitsen/expense:8
+          image: rakshitsen/expense:9
           ports:
             - containerPort: 3000
           # env:
