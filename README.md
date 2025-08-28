@@ -81,24 +81,19 @@ Now visit: **[http://localhost:3000](http://localhost:3000)** 🚀
 
 ---
 
-## 📸 Screenshots
-
-### Dashboard
-
-![Expense Dashboard](https://github.com/Rakshitsen/Expense-Node-App/raw/main/screenshots/dashboard.png)
-
-### Add Expense
-
-![Add Expense](https://github.com/Rakshitsen/Expense-Node-App/raw/main/screenshots/add-expense.png)
 
 ---
 
-## ✨ Future Enhancements
+🚀 Future Enhancements
 
-* 📈 Category-wise expense charts (Pie / Bar)
-* 👤 User Authentication
-* ☁️ Deploy on **Render / Railway / AWS EC2**
-* 📱 Make fully responsive with TailwindCSS/Bootstrap
+User Authentication:
+Add secure user login & registration using JWT/bcrypt to protect routes and personalize user experience.
+
+Multi-user Support:
+Convert app into a multi-user system where each user can manage their own data independently.
+
+Role-based Access Control (RBAC):
+Introduce roles (Admin, User) for better data and permission management.
 
 ---
 
